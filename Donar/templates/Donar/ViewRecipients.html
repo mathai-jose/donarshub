@@ -1,0 +1,290 @@
+{% extends 'Donar/header.html' %}
+{% load static %}
+{% block content %}
+<head>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #4a90e2;
+            --secondary-color: #f8f9fa;
+            --accent-color: #28a745;
+            --text-dark: #2b2b2b;
+            --text-light: #6c757d;
+            --shadow: rgba(0, 0, 0, 0.1);
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            color: var(--text-dark);
+        }
+
+        .con {
+            margin-top: 100px;
+            margin-bottom: 40px;
+            font-weight: 600;
+            color: var(--text-dark);
+            font-size: 2.5rem;
+            text-transform: none;
+            letter-spacing: -0.5px;
+        }
+
+        .search-container {
+            background: white;
+            padding: 25px;
+            border-radius: 15px;
+            box-shadow: 0 8px 16px var(--shadow);
+            margin-bottom: 40px;
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .search-group {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .search-label {
+            font-weight: 500;
+            color: var(--text-dark);
+            font-size: 1rem;
+        }
+
+        .sel-box {
+            padding: 12px 24px;
+            border-radius: 10px;
+            border: 1px solid #dee2e6;
+            background: var(--secondary-color);
+            color: var(--text-dark);
+            font-size: 0.95rem;
+            transition: all 0.3s ease;
+            min-width: 200px;
+        }
+
+        .sel-box:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 3px rgba(74, 144, 226, 0.1);
+        }
+
+        .row-c {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 2rem;
+            padding: 20px;
+        }
+
+        .card {
+            background: white;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 10px 20px var(--shadow);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            width: 100%;
+            padding: 0;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px var(--shadow);
+        }
+
+        .card-image {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+
+        .card-content {
+            padding: 20px;
+        }
+
+        .recipient-name {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: var(--text-dark);
+            margin-bottom: 10px;
+        }
+
+        .recipient-info {
+            color: var(--text-light);
+            font-size: 0.95rem;
+            margin-bottom: 5px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .recipient-info i {
+            width: 16px;
+            color: var(--primary-color);
+        }
+
+        .action-buttons {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px;
+            margin-top: 20px;
+        }
+
+        .action-button {
+            padding: 8px;
+            border-radius: 8px;
+            text-align: center;
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+
+        .chat-btn {
+            background: var(--primary-color);
+            color: white;
+        }
+
+        .appointment-btn {
+            background: var(--accent-color);
+            color: white;
+        }
+
+        .donate-btn {
+            background: #dc3545;
+            color: white;
+        }
+
+        .action-button:hover {
+            opacity: 0.9;
+            transform: translateY(-2px);
+        }
+
+        @media (max-width: 768px) {
+            .search-container {
+                flex-direction: column;
+                align-items: stretch;
+                padding: 15px;
+            }
+
+            .search-group {
+                flex-direction: column;
+                align-items: stretch;
+            }
+
+            .sel-box {
+                width: 100%;
+            }
+
+            .row-c {
+                grid-template-columns: 1fr;
+                padding: 10px;
+            }
+        }
+    </style>
+</head>
+
+<div class="container">
+    <h1 class="con text-center">Find Organizations</h1>
+    
+    <form action="" method="post" id="view_recipient" enctype="multipart/form-data"
+        data-place-url="{% url 'Guest:Ajax_Place' %}" data-recipient-url="{% url 'Donar:ajaxrecipient' %}">
+        {% csrf_token %}
+        <div class="search-container">
+            <div class="search-group">
+                <label class="search-label">District</label>
+                <select name="district" id="district" class="sel-box">
+                    <option value="">Select District</option>
+                    {% for i in district %}
+                    <option value="{{i.id}}">{{i.district_name}}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div class="search-group">
+                <label class="search-label">Place</label>
+                <select name="place" id="place" class="sel-box">
+                    <option value="">Select Place</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="container">
+            <div class="row row-c" id="result">
+                {% for i in data %}
+                <div class="card">
+                    <img src="{{i.proof.url}}" class="card-image" alt="{{i.recipient_name}}">
+                    <div class="card-content">
+                        <div class="recipient-name">{{i.recipient_name}}</div>
+                        <div class="recipient-info">
+                            <i class="fas fa-phone"></i>
+                            <span>{{i.contact}}</span>
+                        </div>
+                        <div class="recipient-info">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <span>{{i.address}}</span>
+                        </div>
+                        <div class="recipient-info">
+                            <i class="fas fa-location-dot"></i>
+                            <span>{{i.place.place_name}}</span>
+                        </div>
+                        <div class="recipient-info">
+                            <i class="fas fa-envelope"></i>
+                            <span>{{i.email}}</span>
+                        </div>
+                        <div class="action-buttons">
+                            <a href="{% url 'Donar:Chat-user' i.id %}" class="action-button chat-btn">
+                                <i class="fas fa-comment"></i>
+                            </a>
+                            <a href="{% url 'Donar:bookappointment' i.id %}" class="action-button appointment-btn">
+                                <i class="fas fa-calendar"></i>
+                            </a>
+                            <a href="{% url 'Donar:donaroffer' i.id %}" class="action-button donate-btn">
+                                <i class="fas fa-hand-holding-heart"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </form>
+</div>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script>
+    $("#district").change(function () {
+        var did = $(this).val();
+        var pid = document.getElementById("place").value;
+        var ur = $("#view_recipient").attr("data-place-url");
+        $.ajax({
+            url: ur,
+            data: { disd: did, },
+            success: function (data) {
+                $("#place").html(data);
+                var ur = $("#view_recipient").attr("data-recipient-url");
+                $.ajax({
+                    url: ur,
+                    data: { did: did, pid: pid },
+                    success: function (data) {
+                        $("#result").html(data);
+                    },
+                });
+            },
+        });
+    });
+
+    $("#place").change(function () {
+        var pid = $(this).val();
+        var did = document.getElementById("district").value;
+        var ur = $("#view_recipient").attr("data-recipient-url");
+        $.ajax({
+            url: ur,
+            data: { did: did, pid: pid },
+            success: function (data) {
+                $("#result").html(data);
+            },
+        });
+    });
+</script>
+{% endblock content %}

@@ -1,0 +1,31 @@
+{% extends 'Admin/header.html' %}
+{% load static %}
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1 style="margin-top: 100px;">Feedback</h1>
+    <table border="10" style="margin-top: 200px;">
+        <tr>
+        <th>Content</th>
+        <th>Date</th>
+        <th>Donar</th>
+        <th>Recipient</th>
+    </tr>
+    {% for i in data %}
+    <tr>
+        <td>{{i.content}} </td>
+        <td>{{i.date}} </td>
+        <td>{{i.donar.donar_name}} </td>
+        <td>{{i.recipient.recipient_name}} </td>
+    </tr>
+    {% endfor %}
+    </table>
+</body>
+</html>
+{% endblock content %}

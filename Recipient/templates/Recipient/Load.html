@@ -1,0 +1,33 @@
+{% load static %}
+
+{% for i in obj %}
+    {% if i.to_recipient.id == sid %}
+    <div class="message received">
+        <div class="message-content">
+            <div class="message-header">
+                <img class="message-avatar" src="{{i.from_donar.photo.url}}" alt="{{i.from_donar.name}}">
+                <span class="message-sender">{{i.from_donar.name}}</span>
+            </div>
+            <div class="message-bubble">
+                {{i.content}}
+            </div>
+            <span class="message-time">{{i.date|date:"g:i A"}}</span>
+        </div>
+    </div>
+    {% endif %}
+
+    {% if i.from_recipient.id == sid %}
+    <div class="message sent">
+        <div class="message-content">
+            <div class="message-header">
+                <span class="message-sender">You</span>
+                <img class="message-avatar" src="{{i.from_recipient.photo.url}}" alt="{{i.from_recipient.name}}">
+            </div>
+            <div class="message-bubble">
+                {{i.content}}
+            </div>
+            <span class="message-time">{{i.date|date:"g:i A"}}</span>
+        </div>
+    </div>
+    {% endif %}
+{% endfor %}

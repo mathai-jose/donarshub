@@ -1,0 +1,99 @@
+{% extends 'Recipient/header.html' %}
+{% load static %}
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    .table {
+      background-color: transparent ;
+      border: 1px white solid ;
+      border-collapse: collapse;
+      width: 100px;
+      font-size: 20px;
+    }
+  
+    th, td {
+      border: 2px aliceblue;
+      padding: 8px;
+      text-align: left;
+    }
+  
+    th {
+      background-color: transparent;
+      color: #fefefe;
+    }
+  
+    tr{
+      border: 1px aliceblue;
+      background-color: transparent;
+      color: #fefefe;
+    }
+   
+    h1{
+        color: white;
+        text-align: center;
+    }
+  </style>
+<body>
+    <h1 align="center" style=" margin-top: 70px;">ADD EVENTS</h1>
+    <table align="center" border="1">
+        <form action="" method="post">
+            {% csrf_token %}
+            <tr>
+                <td> EVENT NAME</td>
+                <td><input type="text" name="event_name" id=""></td>
+            </tr>
+            <tr>
+                <td> DETAILS</td>
+                <td><input type="text" name="details" id=""></td>
+            </tr>
+            <tr>
+                <td>DATE</td>
+                <td><input type="date" name="date" id=""></td>
+            </tr>
+            <tr>
+                <td><input type="submit" value="SAVE"></td>
+                <td><input type="reset" value="CANCEL"></td>
+            </tr>
+        </form>
+    </table>
+    <h2 style="color: gainsboro;">Events</h2>
+    <table border="1">
+        <tr>
+        <th>SLNO</th>
+        <th>EVENT</th>
+        <th>DETAILS</th>
+        <th>DATE</th>
+        <th>STATUS</th>
+        <th>ACTION</th>
+        </tr>
+        {% for i in data %}
+        <tr>
+            <td>{{forloop.counter}} </td>
+            <td>{{i.event_name}} </td>
+            <td>{{i.details}} </td>
+            <td>{{i.date}} </td>
+            <td>
+                {% if i.status == 0 %}
+                <p style="color: red;">NO MORE</p>
+                {% elif i.status == 1 %}
+                <p style="color:pink;">SCHEDULED</p>
+                {% elif i.status == 3 %}
+                <p style="color: greenyellow;">APPOINMENTS REQUESTED</p>
+                {% endif %}
+            </td>
+            <td><a href="{% url 'Recipient:editevent' i.id %}">EDIT EVENT</a>
+                | <a href="{% url 'Recipient:deleteevent' i.id %}">DELETE</a></td>
+        </tr>
+        {% endfor %}
+    </table>
+</body>
+</html>
+{% endblock content %}

@@ -1,0 +1,70 @@
+{% extends 'Recipient/header.html' %}
+{% load static %}
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    table {
+      background-color: transparent ;
+      border: none;
+      border-collapse: collapse;
+      font-size: 25px;
+    }
+  
+    th, td {
+      border: none;
+      padding: 8px;
+      text-align: left;
+    }
+  
+    th {
+      background-color: transparent;
+      color: #fefefe;
+    }
+  
+    tr{
+      background-color: transparent;
+      color: #fefefe;
+    }
+    
+  </style>
+  
+<body>
+    <h1 align="center" style="color: aliceblue; margin-top: 50px;">My Profile</h1>
+    <form action="" method="post">
+        <table border="1" align="center">
+            <tr>
+                <th>Name</th>
+                <td>{{data.recipient_name}}</td>
+            </tr>
+            <tr>
+                <th>Contact</th>
+                <td>{{data.contact}}</td>
+            </tr>
+            <tr>
+                <th>Email</th>
+                <td>{{data.email}}</td>
+            </tr>
+            <tr>
+                <th>Address</th>
+                <td>{{data.address}}</td>
+            </tr>
+            <tr>
+                <th>District</th>
+                <td>{{data.place.district.district_name}}</td>
+            </tr>
+            <tr>
+                <th>Place</th>
+                <td>{{data.place.place_name}}</td>
+            </tr>
+        </table>
+    </form>
+</body>
+</html>
+{% endblock content %}

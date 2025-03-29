@@ -1,0 +1,412 @@
+{% extends 'Donar/header.html' %}
+{% load static %}
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Profile</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            // Function to load places based on selected district
+            function loadPlaces(districtId) {
+                if (!districtId) return;
+                
+                $.ajax({
+                    url: '{% url "Guest:get_places" %}',
+                    type: 'GET',
+                    data: {
+                        'district_id': districtId
+                    },
+                    dataType: 'json',
+                    success: function(data) {
+                        var placeSelect = $('#place');
+                        placeSelect.empty();
+                        placeSelect.append('<option value="">Select Place</option>');
+                        
+                        data.forEach(function(item) {
+                            placeSelect.append(
+                                $('<option></option>')
+                                    .val(item.id)
+                                    .text(item.place_name)
+                            );
+                        });
+
+                        // Set the current place if it exists
+                        if ("{{data.place.id}}") {
+                            placeSelect.val("{{data.place.id}}");
+                        }
+                    },
+                    error: function(xhr, status, error) {
+                        console.error("Error loading places:", error);
+                    }
+                });
+            }
+
+            // Handle district change
+            $('#district').change(function() {
+                var districtId = $(this).val();
+                loadPlaces(districtId);
+            });
+
+            // Load initial places for the current district
+            var initialDistrictId = $('#district').val();
+            if (initialDistrictId) {
+                loadPlaces(initialDistrictId);
+            }
+        });
+    </script>
+    <style>
+        /* Page Layout */
+        body {
+            background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.8));
+            min-height: 100vh;
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        /* Page Title */
+        .edit-title {
+            font-size: 3.5rem;
+            font-weight: 700;
+            color: #ffffff;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+            text-align: center;
+            margin: 80px 0 50px;
+            letter-spacing: 1.2px;
+        }
+
+        /* Form Container */
+        .edit-form-container {
+            max-width: 600px;
+            margin: 0 auto 60px;
+            padding: 45px;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            box-shadow: 0 15px 30px rgba(0,0,0,0.3);
+        }
+
+        /* Table Styling */
+        table {
+            width: 100%;
+            border-collapse: separate;
+            border-spacing: 0 15px;
+        }
+
+        /* Label Styling */
+        th {
+            font-size: 1.5rem;
+            color: #1a2a36;
+            font-weight: 600;
+            padding: 15px 20px;
+            text-align: left;
+            width: 30%;
+            vertical-align: middle;
+        }
+
+        /* Input Field Styling */
+        input[type="text"] {
+            width: 100%;
+            padding: 15px 20px;
+            font-size: 1.4rem;
+            border: 2px solid #c8c8c8;
+            border-radius: 10px;
+            background: #ffffff;
+            color: #2C3E50;
+            transition: all 0.3s ease;
+            font-family: Arial, sans-serif;
+            letter-spacing: 0.5px;
+        }
+
+        input[type="text"]:focus {
+            border-color: #4CAF50;
+            box-shadow: 0 0 10px rgba(76, 175, 80, 0.2);
+            outline: none;
+        }
+
+        /* Button Styling */
+        input[type="submit"],
+        input[type="reset"] {
+            font-size: 1.5rem;
+            font-weight: 600;
+            padding: 16px 40px;
+            border: none;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 1.2px;
+            margin: 10px;
+        }
+
+        input[type="submit"] {
+            background: #2e8b32;
+            color: white;
+            box-shadow: 0 4px 15px rgba(76, 175, 80, 0.3);
+        }
+
+        input[type="reset"] {
+            background: #d32f2f;
+            color: white;
+            box-shadow: 0 4px 15px rgba(244, 67, 54, 0.3);
+        }
+
+        input[type="submit"]:hover,
+        input[type="reset"]:hover {
+            transform: translateY(-3px);
+        }
+
+        input[type="submit"]:hover {
+            background: #206d24;
+            box-shadow: 0 6px 20px rgba(76, 175, 80, 0.4);
+        }
+
+        input[type="reset"]:hover {
+            background: #b71c1c;
+            box-shadow: 0 6px 20px rgba(244, 67, 54, 0.4);
+        }
+
+        /* Button Container */
+        .button-container {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .edit-form-container {
+                width: 90%;
+                padding: 30px;
+                margin: 20px auto;
+            }
+
+            .edit-title {
+                font-size: 2.8rem;
+                margin: 60px 0 40px;
+            }
+
+            input[type="text"] {
+                font-size: 1.3rem;
+                padding: 12px 20px;
+            }
+
+            input[type="submit"],
+            input[type="reset"] {
+                font-size: 1.3rem;
+                padding: 14px 30px;
+            }
+
+            th {
+                font-size: 1.3rem;
+            }
+        }
+
+        /* Additional styles for new fields */
+        .form-row {
+            margin-bottom: 25px;
+        }
+
+        /* Style for disabled/readonly fields */
+        input[type="text"][readonly] {
+            background-color: #f5f5f5;
+            color: #666;
+            cursor: not-allowed;
+        }
+
+        /* Style for select dropdowns */
+        select {
+            width: 100%;
+            padding: 15px 20px;
+            font-size: 1.4rem;
+            border: 2px solid #c8c8c8;
+            border-radius: 10px;
+            background: #ffffff;
+            color: #2C3E50;
+            transition: all 0.3s ease;
+            font-family: Arial, sans-serif;
+            letter-spacing: 0.5px;
+            cursor: pointer;
+            appearance: none;
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+            background-repeat: no-repeat;
+            background-position: right 1rem center;
+            background-size: 1em;
+        }
+
+        select:focus {
+            border-color: #4CAF50;
+            box-shadow: 0 0 10px rgba(76, 175, 80, 0.2);
+            outline: none;
+        }
+
+        /* Show select and form-row styles that were previously hidden */
+        select, 
+        select:focus,
+        .form-row {
+            display: block;
+        }
+
+        /* Enhanced select styling */
+        select {
+            width: 100%;
+            padding: 15px 20px;
+            font-size: 1.4rem;
+            border: 2px solid #c8c8c8;
+            border-radius: 10px;
+            background: #ffffff;
+            color: #2C3E50;
+            transition: all 0.3s ease;
+            font-family: Arial, sans-serif;
+            letter-spacing: 0.5px;
+            cursor: pointer;
+            appearance: none;
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+            background-repeat: no-repeat;
+            background-position: right 1rem center;
+            background-size: 1em;
+        }
+
+        select:focus {
+            border-color: #4CAF50;
+            box-shadow: 0 0 10px rgba(76, 175, 80, 0.2);
+            outline: none;
+        }
+
+        /* Error message styling */
+        .error-message {
+            color: #dc3545;
+            font-size: 0.9rem;
+            margin-top: 5px;
+            display: none;
+        }
+
+        input.error {
+            border-color: #dc3545;
+        }
+    </style>
+</head>
+<body>
+    <!-- Edit Profile Title -->
+    <h1 class="edit-title">Edit Profile</h1>
+    
+    <!-- Edit Profile Form -->
+    <div class="edit-form-container">
+        {% if error %}
+        <div class="server-error">{{ error }}</div>
+        {% endif %}
+        <form action="" method="post" onsubmit="return validateForm()">
+            {% csrf_token %}
+            <table>
+                <tr>
+                    <th>Name</th>
+                    <td><input type="text" name="donar_name" value="{{data.donar_name}}"></td>
+                </tr>
+                <tr>
+                    <th>Contact</th>
+                    <td>
+                        <input type="text" name="contact" id="contact" value="{{data.contact}}" onkeyup="validateContact(this)">
+                        <div class="error-message" id="contact-error">Contact must contain only numbers</div>
+                    </td>
+                </tr>
+                <tr>
+                    <th>Email</th>
+                    <td><input type="text" name="email" value="{{data.email}}" readonly></td>
+                </tr>
+                <tr>
+                    <th>Address</th>
+                    <td>
+                        <input type="text" name="address" id="address" value="{{data.address}}" onkeyup="validateAddress(this)">
+                        <div class="error-message" id="address-error">Address must contain only letters and spaces</div>
+                    </td>
+                </tr>
+                <tr>
+                    <th>District</th>
+                    <td>
+                        <select name="district" id="district" required>
+                            <option value="">Select District</option>
+                            {% for district in districts %}
+                            <option value="{{district.id}}" {% if district.id == data.place.district.id %}selected{% endif %}>
+                                {{district.district_name}}
+                            </option>
+                            {% endfor %}
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <th>Place</th>
+                    <td>
+                        <select name="place" id="place" required>
+                            <option value="">Select Place</option>
+                        </select>
+                    </td>
+                </tr>
+            </table>
+            <div class="button-container">
+                <input type="submit" value="Change">
+                <input type="reset" value="Cancel">
+            </div>
+        </form>
+    </div>
+
+    <script>
+        // ... existing scripts ...
+
+        function validateAddress(input) {
+            const addressPattern = /^[A-Za-z\s]+$/;
+            const errorElement = document.getElementById('address-error');
+            
+            if (!addressPattern.test(input.value)) {
+                input.classList.add('error');
+                errorElement.style.display = 'block';
+                return false;
+            } else {
+                input.classList.remove('error');
+                errorElement.style.display = 'none';
+                return true;
+            }
+        }
+
+        function validateContact(input) {
+            const contactPattern = /^\d+$/;
+            const errorElement = document.getElementById('contact-error');
+            
+            if (!contactPattern.test(input.value)) {
+                input.classList.add('error');
+                errorElement.style.display = 'block';
+                return false;
+            } else {
+                input.classList.remove('error');
+                errorElement.style.display = 'none';
+                return true;
+            }
+        }
+
+        function validateForm() {
+            const addressInput = document.getElementById('address');
+            const contactInput = document.getElementById('contact');
+            return validateAddress(addressInput) && validateContact(contactInput);
+        }
+
+        // Add event listener for the address field
+        document.getElementById('address').addEventListener('input', function() {
+            validateAddress(this);
+        });
+
+        // Add event listener for the contact field
+        document.getElementById('contact').addEventListener('input', function() {
+            validateContact(this);
+        });
+    </script>
+</body>
+</html>
+{% endblock content %}

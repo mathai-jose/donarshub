@@ -1,0 +1,48 @@
+{% extends 'Recipient/header.html' %}
+{% load static %}
+{% block content %}
+<style>
+    .table {
+      background-color: transparent ;
+      border: 1px white solid ;
+      border-collapse: collapse;
+      width: 100px;
+      font-size: 20px;
+    }
+  
+    th, td {
+      border: 2px aliceblue;
+      padding: 8px;
+      text-align: left;
+    }
+  
+    th {
+      background-color: transparent;
+      color: #fefefe;
+    }
+  
+    tr{
+      border: 1px aliceblue;
+      background-color: transparent;
+      color: #fefefe;
+    }
+  </style>
+<h1 style="margin-top: 75px ; color: white;" align="center" >VISITERS LIST</h1>
+<div  style="color: white;" align="center">
+<table border="1" >
+    <tr>
+    <th>Visiter's Name</th>
+    <th>Date</th>
+    <th>Time</th>
+    <th>Purpose</th>
+</tr>
+{% for i in data %}
+<tr>
+    <td>{{i.donar_id.donar_name}}</td>
+    <td>{{i.date}} </td>
+    <td>{{i.time}} </td>
+    <td>{{i.purpose}} </td>
+</tr>
+{% endfor %}
+</table></div>
+{% endblock content %}

@@ -1,0 +1,165 @@
+{% extends 'Donar/header.html' %}
+{% load static %}
+{% block content %}
+<head>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #4a90e2;
+            --success-color: #28a745;
+            --error-color: #dc3545;
+            --text-dark: #2b2b2b;
+            --text-light: #6c757d;
+            --shadow: rgba(0, 0, 0, 0.1);
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+        }
+
+        .appointment-container {
+            max-width: 600px;
+            margin: 120px auto 40px;
+            padding: 30px;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 8px 16px var(--shadow);
+        }
+
+        .appointment-title {
+            color: var(--text-dark);
+            font-size: 1.8rem;
+            font-weight: 600;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .appointment-form {
+            display: grid;
+            gap: 20px;
+        }
+
+        .form-group {
+            display: grid;
+            gap: 8px;
+        }
+
+        .form-label {
+            font-weight: 500;
+            color: var(--text-dark);
+            font-size: 0.95rem;
+        }
+
+        .form-input {
+            padding: 12px;
+            border: 1px solid #dee2e6;
+            border-radius: 8px;
+            font-size: 0.95rem;
+            transition: all 0.3s ease;
+        }
+
+        .form-input:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 3px rgba(74, 144, 226, 0.1);
+        }
+
+        .button-group {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin-top: 10px;
+        }
+
+        .btn {
+            padding: 12px;
+            border: none;
+            border-radius: 8px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .btn-save {
+            background: var(--primary-color);
+            color: white;
+        }
+
+        .btn-cancel {
+            background: var(--text-light);
+            color: white;
+        }
+
+        .btn:hover {
+            opacity: 0.9;
+            transform: translateY(-1px);
+        }
+
+        .alert {
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            font-size: 0.95rem;
+        }
+
+        .alert-error {
+            background: #fde8e8;
+            color: var(--error-color);
+            border: 1px solid #fbd5d5;
+        }
+
+        .alert-success {
+            background: #e6f4ea;
+            color: var(--success-color);
+            border: 1px solid #d4edda;
+        }
+
+        @media (max-width: 768px) {
+            .appointment-container {
+                margin: 100px 20px 40px;
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+
+<div class="appointment-container">
+    <h1 class="appointment-title">Book Appointment</h1>
+
+    {% if error %}
+    <div class="alert alert-error">
+        {{ error }}
+    </div>
+    {% endif %}
+
+    {% if success %}
+    <div class="alert alert-success">
+        {{ success }}
+    </div>
+    {% endif %}
+
+    <form action="" method="post" class="appointment-form">
+        {% csrf_token %}
+        <div class="form-group">
+            <label class="form-label">Date</label>
+            <input type="date" name="date" class="form-input" required min="{% now 'Y-m-d' %}">
+        </div>
+
+        <div class="form-group">
+            <label class="form-label">Purpose of Visit</label>
+            <input type="text" name="purpose" class="form-input" required placeholder="Enter the purpose of your visit">
+        </div>
+
+        <div class="form-group">
+            <label class="form-label">Time of Visit</label>
+            <input type="time" name="time" class="form-input" required>
+        </div>
+
+        <div class="button-group">
+            <button type="submit" class="btn btn-save">Book Appointment</button>
+            <button type="reset" class="btn btn-cancel">Cancel</button>
+        </div>
+    </form>
+</div>
+{% endblock content %}

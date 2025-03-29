@@ -1,0 +1,36 @@
+{% extends 'Donar/header.html' %}
+{% load static %}
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1 align="center" style="margin-top: 100px;">EVENTS</h1>
+    <table align="center">
+        <tr>
+            {% for i in data %}
+            <td>
+            <div style="border:solid;padding:10px">
+            EVENT :{{i.event_name}} <br>
+            DETAILS : {{i.details}} <br>
+            DATE : {{i.date}} <br>
+            CENTER : {{i.recipient_id.recipient_name}} <br>
+            CONTACT : {{i.recipient_id.contact}} <br>
+            PLACE : {{i.recipient_id.place.place_name}} <br>
+        </div>
+    </td>
+    {% if forloop.counter|divisibleby:4 %}:
+</tr>
+<tr>
+    {% endif %}
+    {% endfor %}
+</tr>
+</table>
+</body>
+</html>
+{% endblock content %}

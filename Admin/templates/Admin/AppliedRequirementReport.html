@@ -1,0 +1,47 @@
+{% extends 'Admin/header.html' %}
+{% load static %}
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <h1 style="margin-top: 100px;">APPLIED REQUIREMENTS REPORT</h1>
+    <form action="" method="POST">
+        {% csrf_token %}
+        <table align="left" style="margin-top: 200px;" >
+            <tr>
+                <td>From Date</td>
+                <td><input type="date" name="f_date"></td>
+                <td>To date</td>
+                <td><input type="date" name="t_date"></td>
+            </tr>
+            <tr>
+                <td colspan="3"><input type="submit" value="Show Result"></td>
+            </tr>
+        </table>
+        <table border="1" style="margin-top: 300px;">
+            <tr>
+                <th>ID</th>
+                <th>Requirement</th>
+                <th>Donar</th>
+                <th>Recipient</th>
+            </tr>
+            {% for i in Data %}
+            <tr>
+                <td>{{i.requirements_id.id}}</td>
+                <td>{{i.requirements_id.requirement}}</td>
+                <td>{{i.donar_id.donar_name}}</td>
+                <td>{{i.requirements_id.recipient_id.recipient_name}}</td>
+            </tr>
+            {% endfor %}
+        </table>
+    </form>
+</body>
+</html>
+{% endblock content %}

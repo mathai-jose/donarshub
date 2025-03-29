@@ -1,0 +1,268 @@
+{% extends 'Recipient/header.html' %}
+{% load static %}
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>View Donor Details</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+</head>
+<style>
+    body {
+        font-family: 'Poppins', sans-serif;
+        background: linear-gradient(135deg, #1a2a6c, #b21f1f, #fdbb2d);
+        min-height: 100vh;
+        margin: 0;
+        padding: 0;
+    }
+
+    .container {
+        max-width: 1400px;
+        margin: 0 auto;
+        padding: 20px;
+    }
+
+    .con {
+        margin-top: 40px;
+        margin-bottom: 30px;
+        font-weight: 600;
+        font-size: 2.5rem;
+        color: #ffffff;
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+    }
+
+    .search-container {
+        background: rgba(255, 255, 255, 0.1);
+        backdrop-filter: blur(10px);
+        padding: 25px;
+        border-radius: 15px;
+        margin-bottom: 40px;
+        box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+    }
+
+    .search-container table {
+        margin: 0 auto;
+        border-spacing: 15px;
+    }
+
+    .search-container select {
+        padding: 12px 25px;
+        border-radius: 8px;
+        border: 1px solid rgba(255, 255, 255, 0.3);
+        background: rgba(255, 255, 255, 0.95);
+        font-size: 16px;
+        min-width: 220px;
+        font-family: 'Poppins', sans-serif;
+        cursor: pointer;
+        transition: all 0.3s ease;
+    }
+
+    .search-container select:hover {
+        background: #ffffff;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    }
+
+    .search-container td {
+        padding: 10px;
+        color: #ffffff;
+        font-weight: 500;
+        font-size: 1.1rem;
+    }
+
+    .donor-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+        gap: 30px;
+        padding: 20px;
+    }
+
+    .card {
+        background: rgba(255, 255, 255, 0.95);
+        border-radius: 20px;
+        padding: 25px;
+        box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.2);
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 12px 40px 0 rgba(31, 38, 135, 0.3);
+    }
+
+    .donor-info {
+        margin-bottom: 20px;
+        line-height: 1.8;
+    }
+
+    .donor-info p {
+        margin: 10px 0;
+        font-size: 1.05rem;
+        color: #333;
+    }
+
+    .donor-info span {
+        font-weight: 600;
+        color: #1a2a6c;
+        min-width: 80px;
+        display: inline-block;
+    }
+
+    .donor-photo {
+        width: 180px;
+        height: 180px;
+        object-fit: cover;
+        border-radius: 12px;
+        margin: 15px auto;
+        display: block;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    .chat-link {
+        display: inline-block;
+        background: #4CAF50;
+        color: white;
+        padding: 12px 25px;
+        border-radius: 8px;
+        text-decoration: none;
+        transition: all 0.3s ease;
+        font-weight: 500;
+        text-align: center;
+        width: 100%;
+        margin-top: 15px;
+    }
+
+    .chat-link:hover {
+        background: #45a049;
+        transform: translateY(-2px);
+        box-shadow: 0 5px 15px rgba(76, 175, 80, 0.3);
+    }
+
+    @media (max-width: 768px) {
+        .container {
+            padding: 10px;
+        }
+
+        .con {
+            font-size: 2rem;
+            margin-top: 30px;
+        }
+
+        .search-container {
+            padding: 15px;
+        }
+
+        .search-container select {
+            min-width: 180px;
+            font-size: 14px;
+        }
+
+        .donor-grid {
+            grid-template-columns: 1fr;
+            gap: 20px;
+            padding: 10px;
+        }
+
+        .donor-info p {
+            font-size: 1rem;
+        }
+
+        .donor-photo {
+            width: 150px;
+            height: 150px;
+        }
+    }
+</style>
+
+<body>
+    <h1 align="center" class="con">DONOR DIRECTORY</h1>
+    <div class="container">
+        <div class="search-container">
+            <form action="" method="post" id="view_donar" enctype="multipart/form-data"
+                data-place-url="{% url 'Guest:Ajax_Place' %}" data-donor-url="{% url 'Recipient:ajaxdonor' %}">
+                {% csrf_token %}
+                <table>
+                    <tr>
+                        <td>District</td>
+                        <td>
+                            <select name="district" id="district">
+                                <option value="">All Districts</option>
+                                {% for i in district %}
+                                <option value="{{i.id}}">{{i.district_name}}</option>
+                                {% endfor %}
+                            </select>
+                        </td>
+                        <td>Place</td>
+                        <td>
+                            <select name="place" id="place">
+                                <option value="">All Places</option>
+                            </select>
+                        </td>
+                    </tr>
+                </table>
+            </form>
+        </div>
+
+        <div id="result">
+            <div class="donor-grid">
+                {% for i in data %}
+                <div class="card">
+                    <div class="donor-info">
+                        <p><span>Donor #:</span> {{forloop.counter}}</p>
+                        <p><span>Name:</span> {{i.donar_name}}</p>
+                        <p><span>Gender:</span> {{i.gender}}</p>
+                        <p><span>Contact:</span> {{i.contact}}</p>
+                        <p><span>Place:</span> {{i.place.place_name}}</p>
+                        <p><span>Email:</span> {{i.email}}</p>
+                        <p><span>Address:</span> {{i.address}}</p>
+                        <img src="{{i.photo.url}}" class="donor-photo" alt="Donor Photo">
+                        <a href="{% url 'Recipient:Chat-user' i.id %}" class="chat-link">Chat Now</a>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script>
+        $("#district").change(function () {
+            var did = $(this).val();
+            var pid = document.getElementById("place").value;
+            var ur = $("#view_donar").attr("data-place-url");
+            $.ajax({
+                url: ur,
+                data: { disd: did, },
+                success: function (data) {
+                    $("#place").html(data);
+                    var ur = $("#view_donar").attr("data-donor-url");
+                    $.ajax({
+                        url: ur,
+                        data: { did: did, pid: pid },
+                        success: function (data) {
+                            $("#result").html(data);
+                        },
+                    });
+                },
+            });
+        });
+
+        $("#place").change(function () {
+            var pid = $(this).val();
+            var did = document.getElementById("district").value;
+            var ur = $("#view_donar").attr("data-donor-url");
+            $.ajax({
+                url: ur,
+                data: { did: did, pid: pid },
+                success: function (data) {
+                    $("#result").html(data);
+                },
+            });
+        });
+    </script>
+</body>
+</html>
+{% endblock content %}

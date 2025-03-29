@@ -1,0 +1,19 @@
+<div class="donor-grid">
+    {% for i in data %}
+    <div class="card">
+        <div class="donor-info">
+            <p><span>Donor #:</span> {{forloop.counter}}</p>
+            <p><span>Name:</span> {{i.donar_name}}</p>
+            <p><span>Gender:</span> {{i.gender}}</p>
+            <p><span>Contact:</span> {{i.contact}}</p>
+            <p><span>Place:</span> {{i.place.place_name}}</p>
+            <p><span>Email:</span> {{i.email}}</p>
+            <p><span>Address:</span> {{i.address}}</p>
+            <img src="{{i.photo.url}}" class="donor-photo" alt="Donor Photo">
+            <div>
+                <a href="{% url 'Recipient:Chat-user' i.id %}" class="chat-link">Chat Now</a>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+</div>

@@ -1,0 +1,63 @@
+{% extends 'Recipient/header.html' %}
+{% load static %}
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+  .table {
+    background-color: transparent ;
+    border: 1px white solid ;
+    border-collapse: collapse;
+    width: 100px;
+    font-size: 20px;
+  }
+
+  th, td {
+    border: 2px aliceblue;
+    padding: 8px;
+    text-align: left;
+  }
+
+  th {
+    background-color: transparent;
+    color: #fefefe;
+  }
+
+  tr{
+    border: 1px aliceblue;
+    background-color: transparent;
+    color: #fefefe;
+  }
+ 
+  h1{
+      color: white;
+      text-align: center;
+  }
+</style>
+<body>
+    <h1 align="center" style="margin-top: 50px;">DELIVERED REQUIREMENTS</h1>
+        <table align="center" border="1" >
+            <tr>
+                <th>SLNO</th>
+                <th>DONAR NAME</th>
+                <th>REQUIREMENT</th>
+            </tr>
+            <tr>
+                {% for i in data %}
+                <td>{{forloop.counter}} </td>
+                <td>{{i.donar_id.donar_name}} </td>
+                <td>{{i.requirements_id.requirement}} </td>
+            </tr>
+            {% endfor %}
+        </table>
+</body>
+
+</html>
+{% endblock content %}

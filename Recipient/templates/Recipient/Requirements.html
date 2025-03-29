@@ -1,0 +1,293 @@
+{% extends 'Recipient/header.html' %}
+{% load static %}
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Requirements</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <script>
+        window.onload = function() {
+            // Get today's date in YYYY-MM-DD format
+            const today = new Date();
+            const dd = String(today.getDate()).padStart(2, '0');
+            const mm = String(today.getMonth() + 1).padStart(2, '0');
+            const yyyy = today.getFullYear();
+            const todayStr = yyyy + '-' + mm + '-' + dd;
+            
+            // Set the minimum date for the date input
+            document.querySelector('input[name="for_date"]').min = todayStr;
+        }
+
+        function validateForm(event) {
+            const requirements = document.querySelector('input[name="requirements"]').value.trim();
+            const details = document.querySelector('input[name="details"]').value.trim();
+            const forDate = document.querySelector('input[name="for_date"]').value.trim();
+
+            if (!requirements || !details || !forDate) {
+                event.preventDefault();
+                alert('Fill the fields.');
+                return false;
+            }
+            return true;
+        }
+    </script>
+</head>
+<style>
+    body {
+        margin-top: 80px;
+        font-family: 'Poppins', sans-serif;
+        background-color: #1a1a1a;
+        color: #ffffff;
+    }
+
+    .container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 20px;
+    }
+
+    h1 {
+        color: #ffffff;
+        text-align: center;
+        font-size: 2.5rem;
+        margin-bottom: 2rem;
+        text-transform: uppercase;
+        letter-spacing: 2px;
+        font-weight: 600;
+    }
+
+    .requirements-form {
+        background: rgba(255, 255, 255, 0.1);
+        padding: 2rem;
+        border-radius: 15px;
+        backdrop-filter: blur(10px);
+        margin-bottom: 2rem;
+        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+    }
+
+    .form-table {
+        width: 100%;
+        border-collapse: separate;
+        border-spacing: 0 1rem;
+    }
+
+    .form-table th {
+        color: #ffffff;
+        font-weight: 500;
+        padding: 1rem;
+        text-align: right;
+        width: 30%;
+    }
+
+    .form-table td {
+        padding: 1rem;
+    }
+
+    input[type="text"],
+    input[type="date"] {
+        width: 100%;
+        padding: 0.8rem;
+        border: none;
+        border-radius: 8px;
+        background: rgba(255, 255, 255, 0.1);
+        color: #ffffff;
+        font-family: 'Poppins', sans-serif;
+        transition: all 0.3s ease;
+    }
+
+    input[type="text"]:focus,
+    input[type="date"]:focus {
+        outline: none;
+        background: rgba(255, 255, 255, 0.2);
+        box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.3);
+    }
+
+    .btn {
+        padding: 0.8rem 2rem;
+        border: none;
+        border-radius: 8px;
+        font-family: 'Poppins', sans-serif;
+        font-weight: 500;
+        cursor: pointer;
+        transition: all 0.3s ease;
+    }
+
+    .btn-primary {
+        background: #4CAF50;
+        color: white;
+    }
+
+    .btn-secondary {
+        background: #f44336;
+        color: white;
+        margin-left: 1rem;
+    }
+
+    .btn:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    }
+
+    .requirements-table {
+        width: 100%;
+        border-collapse: separate;
+        border-spacing: 0;
+        background: rgba(255, 255, 255, 0.1);
+        border-radius: 15px;
+        overflow: hidden;
+    }
+
+    .requirements-table th {
+        background: rgba(255, 255, 255, 0.1);
+        color: #ffffff;
+        font-weight: 500;
+        padding: 1rem;
+        text-align: left;
+    }
+
+    .requirements-table td {
+        padding: 1rem;
+        color: #ffffff;
+        border-top: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .requirements-table tr:hover {
+        background: rgba(255, 255, 255, 0.05);
+    }
+
+    .status {
+        padding: 0.5rem 1rem;
+        border-radius: 20px;
+        font-size: 0.9rem;
+        font-weight: 500;
+    }
+
+    .status-accepted {
+        background: rgba(76, 175, 80, 0.2);
+        color: #4CAF50;
+    }
+
+    .status-rejected {
+        background: rgba(244, 67, 54, 0.2);
+        color: #f44336;
+    }
+
+    .status-delivered {
+        background: rgba(33, 150, 243, 0.2);
+        color: #2196F3;
+    }
+
+    .status-offers {
+        background: rgba(233, 30, 99, 0.2);
+        color: #E91E63;
+    }
+
+    .status-process {
+        background: rgba(255, 235, 59, 0.2);
+        color: #FFEB3B;
+    }
+
+    .action-links a {
+        color: #ffffff;
+        text-decoration: none;
+        margin-right: 1rem;
+        transition: all 0.3s ease;
+    }
+
+    .action-links a:hover {
+        color: #4CAF50;
+    }
+
+    .action-links i {
+        margin-right: 0.5rem;
+    }
+</style>
+<body>
+    <div class="container">
+        <h1><i class="fas fa-clipboard-list"></i> Requirements</h1>
+        <form action="" method="post" class="requirements-form" onsubmit="return validateForm(event)">
+            {% csrf_token %}
+            <table class="form-table">
+                <tr>
+                    <th>Requirements</th>
+                    <td><input type="text" name="requirements" value="{{data.requirement}}" placeholder="Enter requirement" required></td>
+                </tr>
+                <tr>
+                    <th>Details</th>
+                    <td><input type="text" name="details" value="{{data.details}}" placeholder="Enter details" required></td>
+                </tr>
+                <tr>
+                    <th>For date</th>
+                    <td><input type="date" name="for_date" value="{{data.for_date}}" required></td>
+                </tr>
+                <tr>
+                    <td colspan="2" style="text-align: center;">
+                        <button type="submit" class="btn btn-primary"><i class="fas fa-save"></i> Save</button>
+                        <button type="reset" class="btn btn-secondary"><i class="fas fa-times"></i> Cancel</button>
+                    </td>
+                </tr>
+            </table>
+        </form>
+
+        <table class="requirements-table">
+            <tr>
+                <th>#</th>
+                <th>Recipient</th>
+                <th>Requirement</th>
+                <th>Details</th>
+                <th>For date</th>
+                <th>Posted on</th>
+                <th>Status</th>
+                <th>Actions</th>
+            </tr>
+            {% for i in requirements %}
+            <tr>
+                <td>{{forloop.counter}}</td>
+                <td>{{i.recipient_id.recipient_name}}</td>
+                <td>{{i.requirement}}</td>
+                <td>{{i.details}}</td>
+                <td>{{i.for_date}}</td>
+                <td>{{i.date_of_post}}</td>
+                <td>
+                    {% if i.status == 1 %}
+                    <span class="status status-accepted">
+                        <i class="fas fa-check-circle"></i> Accepted
+                    </span>
+                    {% elif i.status == 2 %}
+                    <span class="status status-rejected">
+                        <i class="fas fa-times-circle"></i> Rejected
+                    </span>
+                    {% elif i.status == 3 %}
+                    <span class="status status-delivered">
+                        <i class="fas fa-truck"></i> Delivered
+                    </span>
+                    {% elif i.status == 4 %}
+                    <span class="status status-offers">
+                        <i class="fas fa-gift"></i> Offers
+                    </span>
+                    {% else %}
+                    <span class="status status-process">
+                        <i class="fas fa-clock"></i> Processing
+                    </span>
+                    {% endif %}
+                </td>
+                <td class="action-links">
+                    <a href="{% url 'Recipient:editrequirement' i.id %}">
+                        <i class="fas fa-edit"></i> Edit
+                    </a>
+                    <a href="{% url 'Recipient:deleterequirement' i.id %}">
+                        <i class="fas fa-trash"></i> Delete
+                    </a>
+                </td>
+            </tr>
+            {% endfor %}
+        </table>
+    </div>
+</body>
+</html>
+{% endblock content %}

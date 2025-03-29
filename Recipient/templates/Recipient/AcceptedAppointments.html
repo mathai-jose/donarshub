@@ -1,0 +1,62 @@
+{% extends 'Recipient/header.html' %}
+{% load static %}
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+    <style>
+        .table {
+          background-color: transparent ;
+          border: 1px white solid ;
+          border-collapse: collapse;
+          width: 100px;
+          font-size: 20px;
+        }
+      
+        th, td {
+          border: 1px aliceblue;
+          padding: 8px;
+          text-align: left;
+        }
+      
+        th {
+          background-color: transparent;
+          color: #fefefe;
+        }
+      
+        tr{
+          border: 1px aliceblue;
+          background-color: transparent;
+          color: #fefefe;
+        }
+      </style>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <h1 align="center" style="color: white; margin-top: 75px;">ACCEPTED APPOINTMENTS</h1>
+    <table class="table" align="center" border="1" style="border: violet ;">
+        <th>SLNO</th>
+        <th>Visiter</th>
+        <th>Date</th>
+        <th>Time</th>
+        <th>Purpose</th>
+        <th>Action</th>
+        {% for i in data %}
+        <tr>
+            <td>{{forloop.counter}} </td>
+            <td>{{i.donar_id.donar_name}} </td>
+            <td>{{i.date}} </td>
+            <td>{{i.time}} </td>
+            <td>{{i.purpose}}</td>
+            <td><a href="{% url 'Recipient:visitedappointment' i.id %}">VISITED </a></td>
+        </tr>
+        {% endfor %}
+    </table>
+</body>
+
+</html>
+{% endblock content %}

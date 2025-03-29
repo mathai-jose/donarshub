@@ -1,0 +1,30 @@
+{% extends 'Recipient/header.html' %}
+{% load static %}
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<h1 align="center"  style="color: rgb(250, 248, 249); margin-top: 75px;">Feedback</h1>
+<body>
+    <form action="" method="post">
+    {% csrf_token %}
+    <table border="1" align="center" style="border: slategray; color: aliceblue; font-size: large;">
+        <tr>
+            <td>Content</td>
+        </tr>        
+        <tr>
+            <td><input type="text" name="feedback" ></td>
+        </tr>
+        <tr>
+            <td><input type="submit" value="Send Feedback"></td>
+        </tr>
+    </table>
+</form>
+</body>
+</html>
+{% endblock content %}

@@ -1,0 +1,372 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Donars Hub</title>
+
+  <!-- External CSS -->
+  <link href="https://fonts.googleapis.com/css?family=Overpass:300,400,500|Dosis:400,700" rel="stylesheet">
+  <link rel="stylesheet" href="{% static 'user/css/open-iconic-bootstrap.min.css' %}">
+  <link rel="stylesheet" href="{% static 'user/css/animate.css' %}">
+  <link rel="stylesheet" href="{% static 'user/css/owl.carousel.min.css' %}">
+  <link rel="stylesheet" href="{% static 'user/css/owl.theme.default.min.css' %}">
+  <link rel="stylesheet" href="{% static 'user/css/magnific-popup.css' %}">
+  <link rel="stylesheet" href="{% static 'user/css/aos.css' %}">
+  <link rel="stylesheet" href="{% static 'user/css/ionicons.min.css' %}">
+  <link rel="stylesheet" href="{% static 'user/css/bootstrap-datepicker.css' %}">
+  <link rel="stylesheet" href="{% static 'user/css/jquery.timepicker.css' %}">
+  <link rel="stylesheet" href="{% static 'user/css/flaticon.css' %}">
+  <link rel="stylesheet" href="{% static 'user/css/icomoon.css' %}">
+  <link rel="stylesheet" href="{% static 'user/css/fancybox.min.css' %}">
+  <link rel="stylesheet" href="{% static 'user/css/bootstrap.css' %}">
+  <link rel="stylesheet" href="{% static 'user/css/style.css' %}">
+
+  <!-- Custom CSS -->
+  <style>
+    /* Navigation */
+    .navbar {
+      background: rgba(33, 33, 33, 0.98) !important;
+      padding: 20px 0;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+    }
+
+    .navbar-brand {
+      font-size: 2.5rem !important;
+      font-weight: 800 !important;
+      color: #ffffff !important;
+      text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+      letter-spacing: 1px;
+    }
+
+    .nav-link {
+      font-size: 1.3rem !important;
+      font-weight: 600 !important;
+      color: #ffffff !important;
+      padding: 15px 25px !important;
+      transition: all 0.3s ease;
+      text-shadow: 1px 1px 2px rgba(0,0,0,0.2);
+      letter-spacing: 0.5px;
+    }
+
+    .nav-link:hover {
+      color: #4CAF50 !important;
+      transform: translateY(-2px);
+    }
+
+    /* Dropdown Styling */
+    .dropdown-menu {
+      background: rgba(33, 33, 33, 0.98);
+      border: none;
+      border-radius: 12px;
+      box-shadow: 0 6px 20px rgba(0,0,0,0.3);
+      padding: 15px 0;
+    }
+
+    .dropdown-item {
+      font-size: 1.2rem !important;
+      font-weight: 500 !important;
+      color: #ffffff !important;
+      padding: 15px 30px !important;
+    }
+
+    .dropdown-item:hover {
+      background: rgba(76, 175, 80, 0.15);
+      color: #4CAF50 !important;
+      transform: translateX(5px);
+    }
+
+    /* Hero Section */
+    .block-30:before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.6));
+      z-index: 1;
+    }
+
+    .block-30 .container {
+      position: relative;
+      z-index: 2;
+    }
+
+    .heading {
+      font-size: 6rem !important;
+      font-weight: 800 !important;
+      color: #ffffff !important;
+      text-shadow: 3px 3px 10px rgba(0,0,0,0.6);
+      line-height: 1.1;
+      margin-bottom: 40px;
+      animation: fadeInUp 1s ease;
+      letter-spacing: 2px;
+    }
+
+    /* Marquee */
+    .marq {
+      font-size: 1.4rem !important;
+      font-weight: 600 !important;
+      background: rgba(255, 255, 255, 0.97);
+      padding: 15px 25px;
+      border-radius: 12px;
+      box-shadow: 0 6px 20px rgba(0,0,0,0.15);
+    }
+
+    .marq a {
+      font-size: 1.4rem !important;
+      color: #1976D2 !important;
+      font-weight: 600 !important;
+      padding: 0 20px;
+    }
+
+    /* Footer */
+    .footer {
+      background: #1a1a1a;
+      padding: 90px 0 40px;
+    }
+
+    .footer .heading-section {
+      font-size: 1.8rem !important;
+      font-weight: 700 !important;
+      color: #ffffff !important;
+      margin-bottom: 35px;
+      letter-spacing: 0.5px;
+    }
+
+    .footer .lead {
+      font-size: 1.25rem !important;
+      color: #dddddd !important;
+      line-height: 1.8;
+      font-weight: 400;
+    }
+
+    .footer .block-21 .heading a {
+      font-size: 1.4rem !important;
+      font-weight: 600 !important;
+      color: #ffffff !important;
+      line-height: 1.6;
+    }
+
+    .footer .block-23 ul li {
+      margin-bottom: 20px;
+    }
+
+    .footer .block-23 ul li a {
+      color: #ffffff !important;
+      font-size: 1.25rem !important;
+      font-weight: 500 !important;
+    }
+
+    .footer .block-23 .icon {
+      color: #4CAF50 !important;
+      font-size: 1.4rem !important;
+      margin-right: 15px;
+    }
+
+    /* Additional Enhancements */
+    .btn {
+      font-size: 1.25rem !important;
+      font-weight: 600 !important;
+      padding: 15px 30px !important;
+      border-radius: 12px !important;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    /* Container spacing */
+    .container {
+      padding: 0 30px;
+    }
+
+    /* Mobile Responsiveness */
+    @media (max-width: 768px) {
+      .navbar-brand {
+        font-size: 2rem !important;
+      }
+
+      .heading {
+        font-size: 4rem !important;
+      }
+
+      .marq {
+        font-size: 1.2rem !important;
+      }
+
+      .footer .heading-section {
+        font-size: 1.6rem !important;
+      }
+    }
+
+    /* Animations */
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar">
+    <div class="container">
+      <a class="navbar-brand" href="{% static 'user/index.html' %}">Donars Hub</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav"
+        aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="oi oi-menu"></span> Menu
+      </button>
+
+      <div class="collapse navbar-collapse" id="ftco-nav">
+        <ul class="navbar-nav ml-auto">
+          <li class="nav-item active"><a href="{% url 'Donar:homepage' %}" class="nav-link">Home</a></li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="{% url 'Donar:myprofile' %}" id="servicesDropdown" role="button"
+              data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              Profile
+            </a>
+            <ul class="dropdown-menu" aria-labelledby="servicesDropdown">
+              <li><a class="dropdown-item" href="{% url 'Donar:myprofile' %}">My Profile</a></li>
+              <li><a class="dropdown-item" href="{% url 'Donar:editprofile' %}">Edit Profile</a></li>
+              <li><a class="dropdown-item" href="{% url 'Donar:changepswd' %}">Change Password</a></li>
+            </ul>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="{% url 'Donar:homepage' %}" id="servicesDropdown1" role="button"
+              data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Donate</a>
+            <ul class="dropdown-menu" aria-labelledby="servicesDropdown1">
+              <li><a class="dropdown-item" href="{% url 'Donar:viewrequirements' %}">View requirement request</a></li>
+            </ul>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="{% url 'Donar:homepage' %}" id="servicesDropdown2" role="button"
+              data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Contributed</a>
+            <ul class="dropdown-menu" aria-labelledby="servicesDropdown2">
+              <li><a class="dropdown-item" href="{% url 'Donar:appliedrequirements' %}">Accepted requirement
+                  request</a></li>
+              <li><a class="dropdown-item" href="{% url 'Donar:viewpayments' %}">Payments</a></li>
+            </ul>
+          </li>
+          <li class="nav-item"><a href="{% url 'Donar:viewrecipients' %}" class="nav-link">Organizations</a></li>
+          <li class="nav-item"><a href="{% url 'Donar:viewappointments' %}" class="nav-link">Appointments</a></li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="{% url 'Donar:homepage' %}" id="servicesDropdown2" role="button"
+              data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">More</a>
+            <ul class="dropdown-menu">
+              <li><a class="dropdown-item" href="{% url 'Donar:complaint' %}">Complaint</a></li>
+              <li><a class="dropdown-item" href="{% url 'Donar:reply' %}">View Reply</a></li>
+              <li><a class="dropdown-item" href="{% url 'Donar:feedback' %}">Feedback</a></li>
+            </ul>
+          </li>
+          <li class="nav-item"><a href="{% url 'Donar:logout' %}" class="nav-link">Logout</a></li><br>
+        </ul>
+      </div>
+    </div>
+  </nav>
+  <!-- END nav -->
+
+  <div class="block-31" style="position: relative;">
+    <div class="owl-carousel loop-block-31 ">
+      <div class="block-30 block-30-sm item" style="background-image: url({% static 'user/images/bg_1.jpg' %});"
+        data-stellar-background-ratio="0.5">
+        <marquee class="marq" behavior="scroll" direction="left" scrolldelay="100"
+            style="font-size: 20px; color: rgb(0, 0, 0);">Upcoming Events -
+            {% for i in data %}
+            <a href="{% url 'Donar:viewevents' i.id %}">&nbsp;{{i.event_name}}&nbsp;&nbsp;</a>
+            {% endfor %}
+          </marquee>
+        <div class="container">
+          <div class="row align-items-left-content-center text-center">
+            
+            <h2 class="heading col-md-6 col-lg-3 mb-5" style="margin-top: 150px;">Give <br>Share <br>Volunteer</h2>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <footer class="footer">
+    <div class="container">
+      <div class="row mb-6">
+        <div class="col-md-6 col-lg-4">
+          <h3 class="heading-section">Donars Hub</h3>
+          <p class="lead">Connect with like-minded donors, share experiences, and inspire others to give. Together, we
+            can create a culture of kindness and generosity that spreads across borders and transforms lives.</p>
+
+        </div>
+        <div class="col-md-6 col-lg-4">
+          <h3 class="heading-section">Services</h3>
+          <div class="block-21 d-flex mb-4">
+            <div class="text">
+              <h3 class="heading"><a href="{% url 'Donar:viewrequirements' %}">Donate</a>
+              </h3>
+            </div>
+          </div>
+          <div class="block-21 d-flex mb-4">
+            <div class="text">
+              <h3 class="heading"><a href="{% url 'Donar:viewrecipients' %}">Connect with Charity Organisations</a>
+              </h3>
+            </div>
+          </div>
+          <div class="block-21 d-flex mb-4">
+            <div class="text">
+              <h3 class="heading"><a href="{% url 'Donar:viewrecipients' %}">Take a visit</a></h3>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6 col-lg-4">
+          <div class="block-23">
+            <h3 class="heading-section">Get Connected</h3>
+            <ul>
+              <li><a href="#"><span class="icon icon-phone"></span><span class="text">+91 9061071418</span></a></li>
+              <li><a href="#"><span class="icon icon-envelope"></span><span
+                    class="text">donarshub@gmail.com</span></a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- loader -->
+  <div id="ftco-loader" class="show fullscreen"><svg class="circular" width="48px" height="48px">
+      <circle class="path-bg" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke="#eeeeee" />
+      <circle class="path" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke-miterlimit="10"
+        stroke="#F96D00" />
+    </svg></div>
+
+
+  <script src="{% static 'user/js/jquery.min.js' %}"></script>
+  <script src="{% static 'user/js/jquery-migrate-3.0.1.min.js' %}"></script>
+  <script src="{% static 'user/js/popper.min.js' %}"></script>
+  <script src="{% static 'user/js/bootstrap.min.js' %}"></script>
+  <script src="{% static 'user/js/jquery.easing.1.3.js' %}"></script>
+  <script src="{% static 'user/js/jquery.waypoints.min.js' %}"></script>
+  <script src="{% static 'user/js/jquery.stellar.min.js' %}"></script>
+  <script src="{% static 'user/js/owl.carousel.min.js' %}"></script>
+  <script src="{% static 'user/js/jquery.magnific-popup.min.js' %}"></script>
+  <script src="{% static 'user/js/bootstrap-datepicker.js' %}"></script>
+
+  <script src="{% static 'user/js/jquery.fancybox.min.js' %}"></script>
+
+  <script src="{% static 'user/js/aos.js' %}"></script>
+  <script src="{% static 'user/js/jquery.animateNumber.min.js' %}"></script>
+  <script
+    src="{% static 'user/https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&sensor=false' %}"></script>
+  <script src="{% static 'user/js/google-map.js' %}"></script>
+  <script src="{% static 'user/js/main.js' %}"></script>
+
+</body>
+
+</html>

@@ -1,0 +1,159 @@
+{% extends 'Donar/header.html' %}
+{% load static %}
+{% block content %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Profile</title>
+</head>
+<style>
+    /* Page Title */
+    .profile-title {
+        font-size: 3rem !important;
+        font-weight: 700 !important;
+        color: #ffffff !important;
+        text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+        margin-bottom: 40px;
+        text-align: center;
+        letter-spacing: 1px;
+    }
+
+    /* Card Styling */
+    .card {
+        background: rgba(255, 255, 255, 0.95) !important;
+        width: 500px !important;
+        padding: 40px 30px !important;
+        border-radius: 20px !important;
+        box-shadow: 0 15px 30px rgba(0,0,0,0.3) !important;
+        transition: all 0.4s ease;
+        margin: 30px auto;
+    }
+
+    .card:hover {
+        transform: translateY(-10px);
+        box-shadow: 0 20px 40px rgba(0,0,0,0.4) !important;
+    }
+
+    /* Table Styling */
+    table {
+        width: 100%;
+        border-collapse: separate !important;
+        border-spacing: 0 12px !important;
+        margin: 20px 0;
+    }
+
+    th {
+        font-size: 1.3rem !important;
+        color: #2C3E50 !important;
+        font-weight: 600 !important;
+        padding: 15px 20px !important;
+        text-align: left;
+        background: rgba(44, 62, 80, 0.1);
+        border-radius: 8px;
+    }
+
+    td {
+        font-size: 1.2rem !important;
+        color: #34495E !important;
+        padding: 15px 20px !important;
+        background: rgba(255, 255, 255, 0.7);
+        border-radius: 8px;
+    }
+
+    tr {
+        margin-bottom: 15px !important;
+        transition: all 0.3s ease;
+    }
+
+    tr:hover {
+        transform: translateX(5px);
+    }
+
+    /* Background Styling */
+    .dh-banner {
+        position: relative;
+        padding: 80px 0;
+        background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.7));
+    }
+
+    .dh-banner::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: rgba(0,0,0,0.4);
+        z-index: -1;
+    }
+
+    /* Container */
+    .profile-container {
+        max-width: 800px;
+        margin: 0 auto;
+        padding: 0 20px;
+    }
+
+    /* Responsive Design */
+    @media (max-width: 768px) {
+        .card {
+            width: 90% !important;
+            padding: 30px 20px !important;
+        }
+
+        .profile-title {
+            font-size: 2.5rem !important;
+        }
+
+        th, td {
+            font-size: 1.1rem !important;
+            padding: 12px 15px !important;
+        }
+    }
+</style>
+
+<body>
+    <div class="block-30 block-30-sm item dh-banner" data-stellar-background-ratio="0.5">
+        <h1 class="profile-title">MY PROFILE</h1>
+        <div class="profile-container">
+            <form action="" method="post">
+                <div class="card">
+                    <table>
+                        <tr>
+                            <th>Name</th>
+                            <td>{{data.donar_name}}</td>
+                        </tr>
+                        <tr>
+                            <th>Contact</th>
+                            <td>{{data.contact}}</td>
+                        </tr>
+                        <tr>
+                            <th>Email</th>
+                            <td>{{data.email}}</td>
+                        </tr>
+                        <tr>
+                            <th>Address</th>
+                            <td>{{data.address}}</td>
+                        </tr>
+                        <tr>
+                            <th>District</th>
+                            <td>{{data.place.district.district_name}}</td>
+                        </tr>
+                        <tr>
+                            <th>Place</th>
+                            <td>{{data.place.place_name}}</td>
+                        </tr>
+                    </table>
+                </div>
+            </form>
+        </div>
+    </div>
+</body>
+
+</html>
+{% endblock content %}

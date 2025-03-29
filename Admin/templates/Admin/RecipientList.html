@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+{% extends 'Admin/header.html' %}
+{% load static %}
+{% block content %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1 align="center" style="margin-top: 100px;" >List of Recipient Organisations</h1>
+    <form action="" method="post">
+    <table border="1" style="margin-top: 200px;">
+        <tr>
+            <th>Slno</th>
+            <th>Name</th>
+            <th>Contact</th>
+            <th>Email</th>
+            <th>Address</th>
+            <th>Proof</th>
+        </tr>
+        {% for i in data %}
+        <tr>
+            <td>{{forloop.counter}}</td>
+            <td>{{i.donar_name}} </td>
+            <td>{{i.contact}} </td>
+            <td>{{i.email}} </td>
+            <td>{{i.address}} </td>
+            <td><img src="{{i.proof.url}}" width="150" height="150"></td>
+        </tr>
+        {% endfor %}
+    </table>
+</form>
+</body>
+</html>
+{% endblock content %}

@@ -1,0 +1,160 @@
+{% extends 'Guest/header.html' %}
+{% load static %}
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body style="background-color: rgb(6, 17, 67) ;">
+    <center>
+        <h1 style="margin-top: 100px; color: white; ">Donar Registration</h1>
+    </center>
+
+    <form action="" method="post" enctype="multipart/form-data" id="donar_register"
+        data-place-url="{% url 'Guest:Ajax_Place' %}">
+        {% csrf_token %}
+        <table border="1" align="center" style="color: white;margin-bottom: 50px;">
+            <tr>
+                <td>Name</td>
+                <td><input type="text" name="donar_name"  onchange="nameval(this)"><span id="name" ></span></td>
+            </tr>
+            <tr>
+                <td>Contact No.</td>
+                <td><input type="number" name="contact_no"  onchange="checknum(this)"><span id="contact"></span></td>
+            </tr>
+            <tr>
+                <td>Email</td>
+                <td><input type="email" name="email" onchange="emailval(this),chemail(this.value)"><span id="content"></span><span id="content1"></span></td>
+            </tr>
+            <tr>
+                <td>Address</td>
+                <td><input type="text" name="address" id=""></td>
+            </tr>
+            <tr>
+                <td>District</td>
+                <td><select name="district" id="district">
+                        <option value="">--Select--</option>
+                        {% for i in district %}
+                        <option value="{{i.id}}">{{i.district_name}}</option>
+                        {% endfor %}
+
+                    </select></td>
+            </tr>
+            <tr>
+                <td>Place</td>
+                <td><select name="place" id="place">
+                        <option value="">--Select--</option>
+
+                    </select></td>
+
+            </tr>
+            <tr>
+                <td>Gender</td>
+                <td><input type="radio" name="gender" id="" value="Male">Male
+                    <input type="radio" name="gender" id="" value="Female">Female
+                </td>
+            </tr>
+            <tr>
+                <td>Photo</td>
+                <td><input type="file" name="photo" id=""></td>
+            </tr>
+            <tr>
+                <td>Proof</td>
+                <td><input type="file" name="proof" id=""></td>
+            </tr>
+            <tr>
+                <td>Password</td>
+                <td><input type="password" name="password" id="" ></td>
+            </tr>
+            <tr>
+                <td>Confirm Password</td>
+                <td><input type="password" name="c_password" id="" onchange="chkpwd(this,password)"><span id="pass"></span></td>
+            </tr>
+            <tr>
+                <td><input type="submit" value="Register"></td>
+                <td><input type="reset" value="Cancel"></td>
+            </tr>
+    </form>
+    </table>
+</body>
+
+</html>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script>
+    $("#district").change(function () {
+        var did = $(this).val();
+        var ur = $("#donar_register").attr("data-place-url");
+        $.ajax({
+            url: ur,
+            data: { disd: did, },
+            success: function (data) {
+                $("#place").html(data);
+            },
+        });
+    });
+</script>
+
+<script>
+    function chkpwd(txtrp, txtp) {
+        if ((txtrp.value) != (txtp.value)) {
+            document.getElementById("pass").innerHTML = "<span style='color: red;'>Passwords Mismatch</span>";
+        }
+    }
+
+    function checknum(elem) {
+        var numericExpression = /^[0-9]{10,10}$/;
+        if (elem.value.match(numericExpression)) {
+            document.getElementById("contact").innerHTML = "";
+            return true;
+        }
+        else {
+            document.getElementById("contact").innerHTML = "<span style='color: red;'>Numbers Only Allowed</span>";
+            elem.focus();
+            return false;
+        }
+    }
+
+    function emailval(elem) {
+        var emailexp = /^([a-zA-Z0-9.\_\-])+\@([a-zA-Z0-9.\_\-])+\.([a-zA-Z]{2,4})$/;
+        if (elem.value.match(emailexp)) {
+            document.getElementById("content").innerHTML = "";
+            return true;
+        }
+        else {
+
+            document.getElementById("content").innerHTML = "<span style='color: red;'>Check Email Address Entered</span>";;
+            elem.focus();
+            return false;
+        }
+    }
+    function nameval(elem) {
+        var emailexp = /^([A-Za-z ]*)$/;
+        if (elem.value.match(emailexp)) {
+            document.getElementById("name").innerHTML = "";
+            return true;
+        }
+        else {
+
+            document.getElementById("name").innerHTML = "<span style='color: red;'>Alphabets Are Allowed</span>";
+            elem.focus();
+            return false;
+        }
+    }
+    function chemail(elemvalue)
+    {
+        //alert(elemvalue);
+        $.ajax({
+            url: '/ajaxemail/',
+            data: { email: elemvalue, },
+            success: function (data) {
+                $("#content1").html(data);
+            },
+        });
+    }
+</script>
+{% endblock content %}

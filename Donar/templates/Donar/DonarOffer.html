@@ -1,0 +1,35 @@
+{% extends 'Recipient/header.html' %}
+{% load static %}
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+        <h1 align="center" style="margin-top: 100px; color: #ffffff;">Donation Offer </h1>
+        <form action="" method="post">
+            {% csrf_token %}
+            <table border="1" align="center" style="color: #ffffff;">
+                <tr>
+                    <th>Donate</th>
+                    <td><input type="text" name="requirements"></td>
+                </tr>
+                <tr>
+                    <th>Details</th>
+                    <td><input type="text" name="details"></td>
+                </tr>
+                <tr>
+                    <th>Date of delivery</th>
+                    <td><input type="date" name="for_date" ></td>
+                </tr>
+                <tr>
+                    <td><input type="submit" value="Save"></td>
+                    <td><input type="reset" value="Cancel"></td>
+                </tr>
+            </table>
+</body>
+</html>
+{% endblock content %}

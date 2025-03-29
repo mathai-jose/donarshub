@@ -1,0 +1,48 @@
+{% extends 'Guest/header.html' %}
+{% load static %}
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    body{
+        background-color: rgb(6, 17, 67) ;
+    }
+    table{
+        margin-bottom: 100px;
+        border: 1px white;
+        border-collapse: collapse;
+        padding: 8px;
+    }
+    td {
+  color: #fcfdfd; 
+    }
+    td {
+  color: #fdfdfd;
+}
+h1{
+    margin-top: 100px;
+    color: #fdfcfc;
+}
+</style>
+<body>
+    <h1 align="center">OTP VERIFICATION</h1>
+    <form action="" method="post">
+        {% csrf_token %}
+        <table align="center">
+            <tr>
+                <td>Enter OTP</td>
+                <td><input type="text" name="txtotp" ></td>
+            </tr>
+            <tr>
+                <td><input type="submit" value="Confirm"></td>
+            </tr>
+        </table>
+    </form>
+</body>
+</html>
+{% endblock content %}

@@ -1,0 +1,89 @@
+<style>
+    /* body {
+        background-color: rgb(223, 223, 223);
+    } */
+
+    .con {
+        margin-top: 120px;
+    }
+    
+    .ftco-navbar-light .navbar-nav > .nav-item > .nav-link {
+        color: black;
+    }
+
+    .navbar-dark .navbar-brand {
+        color: black;
+    }
+
+    .card {
+        background-color: white;
+        width: 253px;
+        padding: 39px 11px;
+        border-radius: 24px;
+        justify-content: center;
+        box-shadow: 20px 20px 20px;
+    }
+
+    .card:hover {
+        transform: scale(0.9);
+        transition: 0.3s;
+    }
+
+    .sel-box {
+        padding: 8px 28px;
+        border-radius: 8px;
+        margin-left: 15px;
+        margin-right: 11px;
+    }
+    .row-c {
+        display: flex;
+        gap: 3rem;
+    }
+</style>
+
+<div class="container">
+    <div class="row row-c" id="result">
+        {% for i in data %}
+        <div class="col-3 card">
+            
+            <div style="border:1px black solid;border-radius: 12px; padding: 10px;" >
+                <div><img src="{{i.proof.url}}" width="150" height="150"></div>
+                <div>{{i.recipient_name}}</div>
+                <div>{{i.contact}}</div>
+                <div>{{i.address}}</div>
+                <div>{{i.place.place_name}}</div>
+                <div>{{i.email}}</div>
+                <div><a href="{% url 'Donar:Chat-user' i.id %}">Chat Now</a>
+                    <a href="{% url 'Donar:bookappointment' i.id %}">Book Appointment</a>
+                </div>
+            </div>  
+        </div>
+        {% endfor %}
+    </div>         
+</div>
+
+
+<!-- 
+<table border="" align="center">
+    <tr>
+        {% for i in data %}
+        <td>
+            <div style="border:solid;padding:20px">
+                Slno :{{forloop.counter}} <br>
+                Recipient name :{{i.recipient_name}} <br>
+                Contact :{{i.contact}} <br>
+                Email :{{i.email}} <br>
+                Address :{{i.address}} <br>
+                Place :{{i.place.place_name}} <br>
+                <a href="{% url 'Donar:Chat-user' i.id %}">Chat Now</a>&nbsp;&nbsp;
+                <a href="{% url 'Donar:bookappointment' i.id %}">Book Appointment</a>
+
+            </div>
+        </td>
+        {% if forloop.counter|divisibleby:4 %}:
+    </tr>
+    <tr>
+        {% endif %}
+        {% endfor %}
+    </tr>
+</table> -->

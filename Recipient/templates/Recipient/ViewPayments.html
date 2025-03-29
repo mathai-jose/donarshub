@@ -1,0 +1,72 @@
+{% extends 'Recipient/header.html' %}
+{% load static %}
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    .con {
+        margin-top: 90px;
+        color: aliceblue;
+    }
+
+    .ftco-navbar-light .navbar-nav>.nav-item>.nav-link {
+        color: white;
+    }
+
+    .navbar-dark .navbar-brand {
+        color: white;
+    }
+
+    .card {
+        background-color: white;
+        width: 300px;
+        padding: 30px 10px;
+        border-radius: 24px;
+        justify-content: center;
+        box-shadow: 20px 20px 20px;
+    }
+
+    .card:hover {
+        transform: scale(0.9);
+        transition: 0.3s;
+    }
+
+    .sel-box {
+        padding: 8px 28px;
+        border-radius: 8px;
+        margin-left: 15px;
+        margin-right: 11px;
+    }
+</style>
+
+<body>
+    <div class="container">
+        <h1 align="center" class="con">PAYMENTS</h1>
+        <!-- <div class="container"> -->
+        <div class="row">
+            <div class="col-4" id="result">
+                {% for i in data %}
+                <div class="card">
+                    <div style="border:1px white;border-radius: 12px; padding: 10px;">
+                        Sl no :{{forloop.counter}} <br>
+                        Donar Name :{{i.donar_id.donar_name}} <br>
+                        Donar Contact :{{i.donar_id.contact}} <br>
+                        Requirement-{{i.requirements_id.id}} : {{i.requirements_id.requirement}} <br>
+                        Amount donated :{{i.amount}} <br>
+                        Date :{{i.date}} <br>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
+{% endblock content %}

@@ -1,0 +1,46 @@
+{% load static %}
+
+{% for i in obj %}
+
+{% if i.to_donar.id == sid %}
+
+<div class="chat-message is-received">
+    <!-- image -->
+    <img class="user-avatar" src="{{i.from_recipient.photo.url}}" alt="">
+    <div class="message-block">
+        <span>
+
+            {{i.from_recipient.name}}
+        </span>
+        <div class="message-text">
+            {{i.content}}
+        </div>
+    </div>
+</div>
+<div class="chat-message" style="margin: 0px; padding: 0px">
+
+</div>
+{% endif %}
+
+<!-- send -->
+
+
+{% if i.from_donar.id == sid %}
+
+<div class="chat-message is-sent">
+    <!-- img -->
+    <img class="user-avatar" src="{{i.from_donar.photo.url}}" alt="">
+    <div class="message-block">
+        <span>
+            {{i.from_donar.name}}
+        </span>
+        <div class="message-text">
+            {{i.content}}
+        </div>
+    </div>
+</div>
+<div class="chat-message" style="margin: 0px; padding: 0px">
+
+</div>
+{% endif %}
+{% endfor %}

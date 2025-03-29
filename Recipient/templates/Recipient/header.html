@@ -1,0 +1,270 @@
+{% load static %}
+<!doctype html>
+<html class="no-js" lang="zxx">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>Donarshub</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- <link rel="manifest" href="site.webmanifest"> -->
+    <link rel="shortcut icon" type="image/x-icon" href="img/favicon.png">
+    <!-- Place favicon.ico in the root directory -->
+
+    <!-- CSS here -->
+    <link rel="stylesheet" href="{% static 'recipient/css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'recipient/css/owl.carousel.min.css' %}">
+    <link rel="stylesheet" href="{% static 'recipient/css/magnific-popup.css' %}">
+    <link rel="stylesheet" href="{% static 'recipient/css/font-awesome.min.css' %}">
+    <link rel="stylesheet" href="{% static 'recipient/css/themify-icons.css' %}">
+    <link rel="stylesheet" href="{% static 'recipient/css/nice-select.css' %}">
+    <link rel="stylesheet" href="{% static 'recipient/css/flaticon.css' %}">
+    <link rel="stylesheet" href="{% static 'recipient/css/gijgo.css' %}">
+    <link rel="stylesheet" href="{% static 'recipient/css/animate.css' %}">
+    <link rel="stylesheet" href="{% static 'recipient/css/slicknav.css' %}">
+    <link rel="stylesheet" href="{% static 'recipient/css/style.css' %}">
+    <!-- <link rel="stylesheet" href="css/responsive.css"> -->
+</head>
+
+<body>
+    <!--[if lte IE 9]>
+            <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience and security.</p>
+        <![endif]-->
+
+
+    <!-- header-start -->
+    <header>
+        <div class="header-area ">
+            <div class="header-top_area">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-xl-6 col-md-12 col-lg-8">
+                            <div class="short_contact_list">
+                                <ul>
+                                    <li><a href="#"> <i class="fa fa-phone"></i> +91 9764235656</a></li>
+                                    <li><a href="#"> <i class="fa fa-envelope"></i>donarshub@gmail.com</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="col-xl-6 col-md-6 col-lg-4">
+                            <div class="social_media_links d-none d-lg-block">
+                                <a href="#">
+                                    <i class="fa fa-facebook"></i>
+                                </a>
+                                <a href="#">
+                                    <i class="fa fa-pinterest-p"></i>
+                                </a>
+                                <a href="#">
+                                    <i class="fa fa-linkedin"></i>
+                                </a>
+                                <a href="#">
+                                    <i class="fa fa-twitter"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="sticky-header" class="main-header-area">
+                <div class="container-fluid">
+                    <div class="row align-items-center">
+                        <div class="col-xl-3 col-lg-3">
+                            <h1 style="color: aliceblue;">Donars Hub</h1>
+                        </div>
+                        <div class="col-xl-9 col-lg-9">
+                            <div class="main-menu">
+                                <nav>
+                                    <ul id="navigation">
+                                        <li><a href="{% url 'Recipient:homepage' %}">home</a></li>
+                                        <li><a href="{% url 'Recipient:myprofile' %}">My Profile<i class="ti-angle-down"></i></a>
+                                            <ul class="submenu">
+                                                <li><a href="{% url 'Recipient:editprofile' %}">Edit Profile</a></li>
+                                                <li><a href="{% url 'Recipient:changepswd' %}">Change Password</a></li>
+                                            </ul>
+                                        </li>
+                                        <li><a href="#"> Donations <i class="ti-angle-down"></i></a>
+                                            <ul class="submenu">
+                                                <li><a href="{% url 'Recipient:deliveredlist' %}">Contributions</a></li>
+                                                <li><a href="{% url 'Recipient:viewpayments' %}">Payments</a></li>
+                                            </ul>
+                                        </li>
+                                        <li><a href="#">pages <i class="ti-angle-down"></i></a>
+                                            <ul class="submenu">
+                                                <li><a href="{% url 'Recipient:viewdonardetails' %}">Donars</a></li>
+                                                <li><a href="{% url 'Recipient:events' %}">Events</a></li>
+                                                <li><a href="{% url 'Recipient:viewappointments' %}">Appointments</a></li>
+                                                <li><a href="{% url 'Recipient:acceptedappointments' %}">Accepted Appointments</a></li>
+                                                <li><a href="{% url 'Recipient:viewvisiters' %}">Visiters</a></li>
+                                            </ul>
+                                        </li>
+                                        <li><a href="{% url 'Recipient:requirements' %}">Upload Requirements</a></li>
+                                        <li><a href="#" class="block-48-text-1"> More</a>
+                                            <i class="ti-angle-down"></i>
+                                                <ul class="submenu">
+                                                    <li><a href="{% url 'Recipient:donaracceptance' %}">Offered donations</a></li>
+                                                    <li><a href="{% url 'Recipient:acceptconfirmlist' %}">Confirmed donations</a></li>
+                                                    <li><a href="{% url 'Recipient:acceptrejectlist' %}">Rejected donation offers</a></li>                                        
+                                            </ul>
+                                        </li>
+                                        <li><a href="#" class="block-48-text-1"> Others</a>
+                                            <i class="ti-angle-down"></i>
+                                                <ul class="submenu">
+                                                    <li><a href="{% url 'Recipient:complaint' %}">Complaint</a></li>
+                                                    <li><a href="{% url 'Recipient:reply' %}">Reply</a></li>
+                                                    <li><a href="{% url 'Recipient:feedback' %}">Feedback</a></li>                                        
+                                            </ul>
+                                        </li>
+                                        <li><a href="{% url 'Recipient:logout' %}">Logout</a></li>
+                                </nav>
+                                <!-- <div class="Appointment">
+                                    <div class="book_btn d-none d-lg-block">
+                                        <a data-scroll-nav='1' href="{% static 'recipient/Requirements.html' %}">Make a Donate</a>
+                                    </div>
+                                </div> -->
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <div class="mobile_menu d-block d-lg-none"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+    <style>
+        body{
+            background-image: url("{% static 'recipient/img/banner/banner.png' %}");
+            background-position: 0px 115px;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+        }
+    </style>
+    <!-- header-end -->
+    <!-- slider_area_start -->
+    <!-- <div class="slider_area">
+        <div class="single_slider  d-flex align-items-center slider_bg_1 overlay2">
+            <div class="container">
+                <div class="row">
+                </div>
+            </div>
+        </div>
+    </div> -->
+    {% block content %}
+    {% endblock content %}
+
+     <!-- footer_start  -->
+<footer class="footer" style="margin-top: 500px;">
+    <div class="footer_top">
+        <div class="container">
+            <div class="row">
+                <div class="col-xl-4 col-md-4 col-lg-4 ">
+                    <div class="footer_widget">
+                            <div class="col-xl-10 col-lg-12" >
+                                <h1 style="color: #20c997 ;">Donars Hub</h1>
+                            </div>
+                        <p class="address_text">Connect with like-minded donors, share experiences, and inspire others to give. Together, we can create a culture of kindness and generosity that spreads across borders and transforms lives.
+                        </p>
+                        <div class="socail_links">
+                            <ul>
+                                <li>
+                                    <a href="#">
+                                        <i class="ti-facebook"></i>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#">
+                                        <i class="ti-twitter-alt"></i>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#">
+                                        <i class="fa fa-dribbble"></i>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#">
+                                        <i class="fa fa-instagram"></i>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="col-xl-2 col-md-6 col-lg-2">
+                    <div class="footer_widget">
+                        <h3 class="footer_title">
+                            Services
+                        </h3>
+                        <ul>
+                            <li><a href="{% url 'Recipient:viewdonardetails' %}">View Donars</a></li>
+                            <li><a href="{% url 'Recipient:requirements' %}">Request Donations</a></li>
+                            <li><a href="{% url 'Recipient:events' %}">Upload Events</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-xl-3 col-md-6 col-lg-3">
+                    <div class="footer_widget">
+                        <h3 class="footer_title">
+                            Contacts
+                        </h3>
+                        <div class="contacts">
+                            <p>+91 9878676546 <br>
+                                donarshub@gmail.com <br>                                
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xl-3 col-md-6 col-lg-2">
+                    <div class="footer_widget">
+                        <h3 class="footer_title">
+                            Complaint and Feedback
+                        </h3>
+                        <div class="link">
+                            <ul>
+                            <li><a href="{% url 'Recipient:complaint' %}">Complaint</a></li>
+                            <li><a href="{% url 'Recipient:feedback' %}">Feedback</a></li>
+                        </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
+<!-- footer_end  -->
+
+<!-- link that opens popup -->
+
+<!-- JS here -->
+<script src="{% static 'recipient/js/vendor/modernizr-3.5.0.min.js' %}"></script>
+<script src="{% static 'recipient/js/vendor/jquery-1.12.4.min.js' %}"></script>
+<script src="{% static 'recipient/js/popper.min.js' %}"></script>
+<script src="{% static 'recipient/js/bootstrap.min.js' %}"></script>
+<script src="{% static 'recipient/js/owl.carousel.min.js' %}"></script>
+<script src="{% static 'recipient/js/isotope.pkgd.min.js' %}"></script>
+<script src="{% static 'recipient/js/ajax-form.js' %}"></script>
+<script src="{% static 'recipient/js/waypoints.min.js' %}"></script>
+<script src="{% static 'recipient/js/jquery.counterup.min.js' %}"></script>
+<script src="{% static 'recipient/js/imagesloaded.pkgd.min.js' %}"></script>
+<script src="{% static 'recipient/js/scrollIt.js' %}"></script>
+<script src="{% static 'recipient/js/jquery.scrollUp.min.js' %}"></script>
+<script src="{% static 'recipient/js/wow.min.js' %}"></script>
+<script src="{% static 'recipient/js/nice-select.min.js' %}"></script>
+<script src="{% static 'recipient/js/jquery.slicknav.min.js' %}"></script>
+<script src="{% static 'recipient/js/jquery.magnific-popup.min.js' %}"></script>
+<script src="{% static 'recipient/js/plugins.js' %}"></script>
+<script src="{% static 'recipient/js/gijgo.min.js' %}"></script>
+<!--contact js-->
+<script src="{% static 'recipient/js/contact.js' %}"></script>
+<script src="{% static 'recipient/js/jquery.ajaxchimp.min.js' %}"></script>
+<script src="{% static 'recipient/js/jquery.form.js' %}"></script>
+<script src="{% static 'recipient/js/jquery.validate.min.js' %}"></script>
+<script src="{% static 'recipient/js/mail-script.js' %}"></script>
+
+<script src="{% static 'recipient/js/main.js' %}"></script>
+</body>
+
+</html>

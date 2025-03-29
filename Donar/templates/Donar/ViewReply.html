@@ -1,0 +1,40 @@
+{% extends 'Donar/header.html' %}
+{% load static %}
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div class="block-30 block-30-sm item dh-banner"
+    data-stellar-background-ratio="0.5" >
+    <h1 align="center" >Reply</h1>
+    <center><div class="card" style="width: 35%;">
+    <table align=center border="1" style="color:rgb(0, 0, 0) ;" >
+        <tr>
+            <th>Title</th>
+            <th>Content</th>
+            <th>Status</th>
+        </tr>
+        {% for i in data %}
+        <tr>
+            <td>{{i.title}} </td>
+            <td>{{i.content}} </td>
+            <td>
+                {% if i.status == 0 %}
+                <p style="color: rgb(137, 63, 50);">Not yet replied</p>
+                {% elif i.status == 1 %}
+                <p style="color: rgb(20, 226, 20);">{{i.reply}} <br>{{i.reply_date}}</p>
+                {% endif %}
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+    </div>
+</div></center>
+</body>
+</html>
+{% endblock content %}

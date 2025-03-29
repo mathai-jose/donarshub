@@ -1,0 +1,37 @@
+{% extends 'Donar/header.html' %}
+{% load static %}
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1 align="center" style="margin-top: 100px;" >PAYMENTS</h1>
+    <table align="center" style="margin-bottom: 100px;">
+        <tr>
+            {% for i in data %}
+            <td>
+                <div style="border:solid;padding:10px">
+                Sl no :{{forloop.counter}} <br>
+                Recipient Name :{{i.requirements_id.recipient_id.recipient_name}} <br>
+                Recipient Contact :{{i.requirements_id.recipient_id.contact}} <br>
+                Requirement-{{i.requirements_id.id}} : {{i.requirements_id.requirement}} <br>
+                Amount donated :{{i.amount}} <br>
+                Date :{{i.date}} <br>
+            </div>
+        </td>
+        {% if forloop.counter|divisibleby:4 %}
+    </tr>
+    <tr>
+        {% endif %}
+        {% endfor %}
+    </tr>
+</table>
+    
+</body>
+</html>
+{% endblock content %}
